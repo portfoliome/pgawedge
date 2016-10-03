@@ -1,3 +1,26 @@
+*.pyc
+*.egg*
+.coverage
+.tox
+venv
+_build
+build/
+.DS_Store
+.cache/
+.env
+.venv
+.envrc
+/dist
+/tmp
+
+# pycharm
+.idea/
+
+# ipython
+.ipynb_checkpoints/
+
+# Sublime
+/*.sublime-*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
