@@ -1,0 +1,31 @@
+language: python
+python:
+  - "3.5"
+addons:
+  postgresql: "9.4"
+env:
+  global:
+    - DB=postgresql
+    - PGHOST=localhost
+    - PGDATABASE=pga_testing
+    - PGUSER=postgres
+cache:
+  directories:
+    - $HOME/.cache/pip/wheels
+    - $HOME/travis/virtualenv/python3.5.2
+
+sudo: false
+install:
+  - pip install --upgrade pip
+  - pip install wheel
+  - pip install -r requirements.txt
+  - pip install -r requirements-test.txt
+  - python setup.py install
+
+# before_script:
+  # - psql -c 'CREATE database IF NOT EXISTS pga_testing;' -U postgres
+  # - psql -U postgres -c "create user pga_user"
+script:
+  # - psql -c 'CREATE DATABASE $PGDATABASE;' -U postgres
+  - python create_db.py
+  - py.test tests -s
