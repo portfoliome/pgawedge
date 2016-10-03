@@ -1,17 +1,20 @@
+import os
 from collections import OrderedDict
 
 from sqlalchemy import MetaData, create_engine
 
-from config import Config
-from finegar.db.connections import create_sa_engine
+from pga.connections import create_alchemy_engine
 
 
 class AlchemySQLFixture(object):
 
     @classmethod
     def setUpClass(cls):
-        cls.postgres_config = Config.postgres
-        cls.engine = create_sa_engine(**cls.postgres_config)
+        cls.postgres_config = {
+            'database': 'pga_testing',
+            'host': 'localhost'
+        }
+        cls.engine = create_alchemy_engine(**cls.postgres_config)
         cls.conn = cls.engine.connect()
         cls.class_meta = MetaData()
         cls._prep_db()
