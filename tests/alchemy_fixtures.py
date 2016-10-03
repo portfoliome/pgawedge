@@ -1,4 +1,3 @@
-import os
 from collections import OrderedDict
 
 from sqlalchemy import MetaData, create_engine

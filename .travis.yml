@@ -27,4 +27,5 @@ install:
   # - psql -U postgres -c "create user pga_user"
 script:
   # - psql -c 'CREATE DATABASE $PGDATABASE;' -U postgres
+  - python create_db.py
   - py.test tests -s
