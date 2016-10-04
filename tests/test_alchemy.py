@@ -2,7 +2,7 @@ import unittest
 
 import sqlalchemy as sa
 
-from pga.alchemy import sa_column_dict_to_column
+from pgawedge.alchemy import sa_column_dict_to_column
 
 
 class TestAlchemySchema(unittest.TestCase):

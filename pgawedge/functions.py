@@ -4,6 +4,9 @@ from sqlalchemy.ext import compiler
 from sqlalchemy.types import TIMESTAMP
 
 
+__all__ = ('utcnow',)
+
+
 class utcnow(FunctionElement):
     """Server side UTC timestamp."""
 

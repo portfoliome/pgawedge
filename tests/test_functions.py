@@ -3,7 +3,7 @@ import unittest
 import sqlalchemy as sa
 from sqlalchemy.schema import CreateColumn
 
-from pga.alchemy_types import utcnow
+from pgawedge.functions import utcnow
 from .common import PostgresStatementFixture
 from .alchemy_fixtures import create_mock_engine
 

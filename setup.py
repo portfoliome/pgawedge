@@ -4,7 +4,7 @@ import os
 from setuptools import find_packages, setup
 
 ENCODING = 'utf-8'
-PACKAGE_NAME = 'pga'
+PACKAGE_NAME = 'pgawedge'
 
 local_directory = os.path.abspath(os.path.dirname(__file__))
 version_path = os.path.join(local_directory, PACKAGE_NAME, '_version.py')
@@ -30,7 +30,7 @@ setup(name=PACKAGE_NAME,
       version=version_ns['__version__'],
       license='BSD',
       description='sqlalchemy postgresql adapter and utilities.',
-      url='https://github.com/portfoliome/pga',
+      url='https://github.com/portfoliome/pgawedge',
       classifiers=['Private :: Do Not Upload'],
       author='Philip Martin',
       author_email='philip.martin@censible.co',
