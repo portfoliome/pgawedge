@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from sqlalchemy import MetaData, create_engine
 
-from pga.connections import create_alchemy_engine
+from pgawedge.connections import create_alchemy_engine
 
 
 class AlchemySQLFixture(object):

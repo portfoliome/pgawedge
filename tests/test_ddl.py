@@ -2,7 +2,7 @@ import unittest
 
 import sqlalchemy as sa
 
-from pga.ddl import CreateTableAs
+from pgawedge.ddl import CreateTableAs
 from .alchemy_fixtures import AlchemySQLFixture
 
 

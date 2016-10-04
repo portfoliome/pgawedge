@@ -1,6 +1,6 @@
 import unittest
 
-from pga.db import Schema
+from pgawedge.db import Schema
 from .common import PostgresStatementFixture
 
 

@@ -2,8 +2,8 @@
 import sqlalchemy as sa
 from sqlalchemy import MetaData
 
-from pga.postgres import CONSTRAINT_CONVENTIONS
-from pga import db
+from pgawedge.postgres import CONSTRAINT_CONVENTIONS
+from pgawedge import db
 
 
 __all__ = ('declaure_schema', 'drop_schema', 'sa_meta_schema',)
