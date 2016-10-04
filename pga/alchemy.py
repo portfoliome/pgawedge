@@ -5,6 +5,10 @@ from sqlalchemy import MetaData
 from pga.postgres import CONSTRAINT_CONVENTIONS
 from pga import db
 
+
+__all__ = ('declaure_schema', 'drop_schema', 'sa_meta_schema',)
+
+
 PRIMARY_KEY = 'primary_key'
 
 
