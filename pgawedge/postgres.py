@@ -10,6 +10,7 @@ from sqlalchemy.types import NullType
 
 
 PG_DIALECT = postgres_dialect.dialect()
+RESERVED_WORDS = frozenset(postgres_dialect.RESERVED_WORDS)
 
 CONSTRAINT_CONVENTIONS = {
     "ix": '%(column_0_label)s_idx',
