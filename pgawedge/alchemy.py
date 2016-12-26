@@ -6,7 +6,7 @@ from pgawedge.postgres import CONSTRAINT_CONVENTIONS
 from pgawedge import db
 
 
-__all__ = ('declaure_schema', 'drop_schema', 'sa_meta_schema',)
+__all__ = ('declare_schema', 'drop_schema', 'sa_meta_schema',)
 
 
 PRIMARY_KEY = 'primary_key'
