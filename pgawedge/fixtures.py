@@ -1,3 +1,8 @@
+"""
+fixtures.py contains base classes useful for subclassing or checking
+unittest specification.
+"""
+
 from collections import OrderedDict
 
 from sqlalchemy import MetaData, create_engine

@@ -5,7 +5,7 @@ from sqlalchemy.schema import CreateColumn
 
 from pgawedge.functions import utcnow
 from .common import PostgresStatementFixture
-from .alchemy_fixtures import create_mock_engine
+from pgawedge.fixtures import create_mock_engine
 
 
 class TestAlchemyUTCNow(PostgresStatementFixture, unittest.TestCase):

@@ -3,7 +3,7 @@ import unittest
 import sqlalchemy as sa
 
 from pgawedge.ddl import CreateTableAs
-from .alchemy_fixtures import AlchemySQLFixture
+from pgawedge.fixtures import AlchemySQLFixture
 
 
 class TestCreateTableAs(AlchemySQLFixture, unittest.TestCase):

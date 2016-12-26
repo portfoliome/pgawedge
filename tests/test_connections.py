@@ -4,7 +4,7 @@ from psycopg2.extensions import connection as pg_connection
 
 from pgawedge.connections import format_alchemy_url, get_raw_connection
 
-from .alchemy_fixtures import AlchemySQLFixture
+from pgawedge.fixtures import AlchemySQLFixture
 
 
 class TestSqlalchemyConnections(AlchemySQLFixture, unittest.TestCase):
