@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/portfoliome/pgawedge.svg?branch=master)
+[![Code Health](https://landscape.io/github/portfoliome/pgawedge/master/landscape.svg?style=flat)](https://landscape.io/github/portfoliome/pgawedge/master)
+
 # pgawedge
 Postgresql Sqlalchemy adapter.
 
