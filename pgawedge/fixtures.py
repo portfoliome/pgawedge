@@ -8,6 +8,7 @@ from collections import OrderedDict
 from sqlalchemy import MetaData, create_engine
 
 from pgawedge.connections import create_alchemy_engine
+from pgawedge.postgres import CONSTRAINT_CONVENTIONS
 
 
 class AlchemySQLFixture(object):
@@ -18,7 +19,7 @@ class AlchemySQLFixture(object):
     def setUpClass(cls):
         cls.engine = create_alchemy_engine(**cls.db_config)
         cls.conn = cls.engine.connect()
-        cls.class_meta = MetaData()
+        cls.class_meta = MetaData(naming_convention=CONSTRAINT_CONVENTIONS)
         cls._prep_db()
         cls.class_meta.create_all(cls.engine)
 

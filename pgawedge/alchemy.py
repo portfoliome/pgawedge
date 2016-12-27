@@ -1,9 +1,9 @@
-
 import sqlalchemy as sa
 from sqlalchemy import MetaData
 
+from postpy import base as pg
+
 from pgawedge.postgres import CONSTRAINT_CONVENTIONS
-from pgawedge import db
 
 
 __all__ = ('declare_schema', 'drop_schema', 'sa_meta_schema',)
@@ -20,7 +20,7 @@ def sa_meta_schema(schema_name=None):
 def declare_schema(engine, schema_name):
     """Execute declaration for schema space."""
 
-    schema = db.Schema(schema_name)
+    schema = pg.Schema(schema_name)
     statement = sa.DDL(schema.create_statement())
 
     with engine.begin() as conn:
@@ -30,7 +30,7 @@ def declare_schema(engine, schema_name):
 def drop_schema(engine, schema_name):
     """Execute teardown for schema space."""
 
-    schema = db.Schema(schema_name)
+    schema = pg.Schema(schema_name)
     statement = sa.DDL(schema.drop_statement())
 
     with engine.begin() as conn:
@@ -40,7 +40,7 @@ def drop_schema(engine, schema_name):
 def reset_schema(engine, schema_name):
     """Execute drop and declaration for schema space."""
 
-    schema = db.Schema(schema_name)
+    schema = pg.Schema(schema_name)
     drop_statement = sa.DDL(schema.drop_statement())
     create_statement = sa.DDL(schema.create_statement())
 

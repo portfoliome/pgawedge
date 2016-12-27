@@ -1,3 +1,6 @@
+"""
+Compilers for postgres function statements.
+"""
 
 from sqlalchemy.sql.expression import FunctionElement
 from sqlalchemy.ext import compiler
