@@ -14,11 +14,7 @@ class AlchemySQLFixture(object):
 
     @classmethod
     def setUpClass(cls):
-        cls.postgres_config = {
-            'database': 'pga_testing',
-            'host': 'localhost'
-        }
-        cls.engine = create_alchemy_engine(**cls.postgres_config)
+        cls.engine = create_alchemy_engine()
         cls.conn = cls.engine.connect()
         cls.class_meta = MetaData()
         cls._prep_db()
