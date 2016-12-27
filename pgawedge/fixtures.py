@@ -11,10 +11,12 @@ from pgawedge.connections import create_alchemy_engine
 
 
 class AlchemySQLFixture(object):
+    # set db_config in sub-class to override config if needed
+    db_config = dict()
 
     @classmethod
     def setUpClass(cls):
-        cls.engine = create_alchemy_engine()
+        cls.engine = create_alchemy_engine(**cls.db_config)
         cls.conn = cls.engine.connect()
         cls.class_meta = MetaData()
         cls._prep_db()
