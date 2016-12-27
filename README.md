@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/portfoliome/pgawedge.svg?branch=master)
+[![Build Status](https://travis-ci.org/portfoliome/pgawedge.svg?branch=master)](https://travis-ci.com/portfoliome/pgawedge)
+[![codecov.io](http://codecov.io/github/portfoliome/pgawedge/coverage.svg?branch=master)](http://codecov.io/github/portfoliome/pgawedge?branch=master)
 [![Code Health](https://landscape.io/github/portfoliome/pgawedge/master/landscape.svg?style=flat)](https://landscape.io/github/portfoliome/pgawedge/master)
 
 # pgawedge

@@ -1,3 +1,6 @@
+"""
+Compiler objects for postgres data definition language.
+"""
 
 from sqlalchemy.sql.expression import Executable, ClauseElement
 from sqlalchemy.ext.compiler import compiles

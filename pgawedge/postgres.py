@@ -1,3 +1,8 @@
+"""
+sqlalchemy data types and dialects for postgres, as well as
+sqlalchemy configuration utilities for postgres conventions.
+"""
+
 from datetime import date, datetime
 import uuid
 

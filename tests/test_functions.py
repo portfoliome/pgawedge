@@ -2,9 +2,9 @@ import unittest
 
 import sqlalchemy as sa
 from sqlalchemy.schema import CreateColumn
+from postpy.fixtures import PostgresStatementFixture
 
 from pgawedge.functions import utcnow
-from .common import PostgresStatementFixture
 from pgawedge.fixtures import create_mock_engine
 
 
