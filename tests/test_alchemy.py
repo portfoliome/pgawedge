@@ -16,7 +16,7 @@ def schema_exists(engine, schema_name):
     with engine.begin() as conn:
         result = conn.execute(SELECT_SCHEMA_QUERY, (schema_name,)).fetchone()
 
-        return result is not None
+        return bool(result)
 
 
 class TestDeclareSchema(AlchemySQLFixture, unittest.TestCase):
@@ -41,7 +41,9 @@ class TestSchemaUtilities(AlchemySQLFixture, unittest.TestCase):
     def setUp(self):
         self.schema_name = 'schema_helpers'
         with self.engine.begin() as conn:
-            conn.execute(sa.text('CREATE SCHEMA {}'.format(self.schema_name)))
+            conn.execute(
+                sa.text('CREATE SCHEMA {}'.format(self.schema_name))
+            )
 
     def test_drop_schema(self):
         drop_schema(self.engine, self.schema_name)

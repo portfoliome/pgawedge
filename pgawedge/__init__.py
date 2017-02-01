@@ -8,3 +8,4 @@ from pgawedge.ddl import CreateTableAs
 from pgawedge.postgres import (PG_DIALECT, RESERVED_WORDS,
                                ARRAY, BOOLEAN, CHAR, DATE, FLOAT, JSON,
                                JSONB, INTEGER, TEXT, TIMESTAMP, UUID, VARCHAR)
+

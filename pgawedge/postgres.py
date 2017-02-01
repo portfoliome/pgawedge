@@ -4,14 +4,15 @@ sqlalchemy configuration utilities for postgres conventions.
 """
 
 from datetime import date, datetime
+from types import MappingProxyType
 import uuid
 
-from sqlalchemy.dialects.postgresql import (
-    ARRAY, BOOLEAN, CHAR, DATE, FLOAT, JSON,
-    JSONB, INTEGER, TEXT, TIMESTAMP, UUID, VARCHAR
-)
 from sqlalchemy.databases import postgresql as postgres_dialect
-from sqlalchemy.types import NullType
+from sqlalchemy.dialects.postgresql.base import ischema_names
+from pgawedge.data_types import (
+    ARRAY, BOOLEAN, CHAR, DATE, FLOAT, JSON,
+    JSONB, INTEGER, TEXT, TIMESTAMP, UUID, VARCHAR, NullType
+)
 
 
 PG_DIALECT = postgres_dialect.dialect()
@@ -38,3 +39,9 @@ ALCHEMY_TO_PYTHON_DATA_TYPE = {
     UUID: uuid.UUID,
     TIMESTAMP: datetime
 }
+
+# swap uuid to custom type
+POSTGRES_TO_ALCHEMY_TYPE = MappingProxyType(
+    dict((k, v) if k != 'uuid' else (k, UUID)
+         for k, v in ischema_names.items())
+)
