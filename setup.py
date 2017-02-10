@@ -34,9 +34,11 @@ setup(name=PACKAGE_NAME,
       classifiers=[
           'Intended Audience :: Developers',
           'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
           'Topic :: Database',
           'Topic :: Database :: Database Engines/Servers',
-          'Development Status :: 2 - Pre-Alpha'
+          'Topic :: Utilities',
+          'Development Status :: 3 - Alpha'
       ],
       author='Philip Martin',
       author_email='philip.martin@censible.co',
