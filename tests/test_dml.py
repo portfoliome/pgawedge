@@ -45,10 +45,9 @@ class TestRequiredColumns(unittest.TestCase):
         self.assertFalse(has_default(self.primary_key))
 
     def test_filter_server_default_columns(self):
-        expected = [self.server_default_column]
         result = list(filter_server_default_columns(self.table))
 
-        self.assertEqual(expected, result)
+        self.assertNotIn(self.server_default_column, result)
 
     def test_is_autoincrement_column(self):
         self.assertTrue(is_autoincrement_column(self.autoincrement_column))

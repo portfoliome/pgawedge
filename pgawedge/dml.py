@@ -18,7 +18,7 @@ def filter_server_default_columns(table: Table) -> Iterable[Column]:
     """Table columns without server defaults."""
 
     for column in table.columns:
-        if has_server_default(column):
+        if has_server_default(column) is False:
             yield column
 
 
