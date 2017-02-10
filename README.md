@@ -7,8 +7,14 @@ Postgresql Sqlalchemy adapter.
 
 # Purpose
 
-pgawedge acts as an adapter(wedge) for setting sqlalchemy specifically to use postgres conventions, default postgres connection environmental variables, as well as contain helper utilities that typically arise for postgres. Many of the utilities rely on implementations buried throughout sqlalchemy's extensive documentation.
+pgawedge acts as an adapter(wedge) for setting sqlalchemy to use postgres conventions. Additionally, many utilities that relying on implementations buried throughout sqlalchemy's extensive documentation are included.
+
+These include:
+1. default postgres connection environmental variables names.
+2. Primary key, foreign key, constraint naming conventions.
+3. Server side UUID and UTC TIMESTAMP creation.
+4. Serialization/deserialization for UUID's and JSON objects.
 
 # Pre-release Status
 
-NOTE: pgawedge is in a pre-release state and expect the API to change.
+NOTE: pgawedge is still a pre-release and the API Could change. The most significant changes would affect the schema reflection API in alchemy.py.
