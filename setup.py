@@ -38,7 +38,7 @@ setup(name=PACKAGE_NAME,
           'Topic :: Database',
           'Topic :: Database :: Database Engines/Servers',
           'Topic :: Utilities',
-          'Development Status :: 3 - Alpha'
+          'Development Status :: 4 - Beta'
       ],
       author='Philip Martin',
       author_email='philip.martin@censible.co',
