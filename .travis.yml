@@ -30,7 +30,7 @@ install:
 
 script:
   - python create_db.py
-  - py.test tests -s --cov
+  - py.test tests --cov=./
 
 after_success:
   - codecov

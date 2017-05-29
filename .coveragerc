@@ -1,5 +1,8 @@
 [run]
 branch = True
+omit: pgawedge/fixtures.py
+      setup.py
+      create_db.py
 
 [report]
 show_missing = true
