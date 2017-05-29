@@ -1,9 +1,10 @@
 import unittest
 
 import sqlalchemy as sa
+from sqlalchemy import column, select, table
 
 from pgawedge.fixtures import AlchemySQLFixture
-from pgawedge.helpers import get_row_count
+from pgawedge.helpers import get_row_count, stringify_query
 
 
 class TestGetRowCount(AlchemySQLFixture, unittest.TestCase):
@@ -38,3 +39,20 @@ class TestGetRowCount(AlchemySQLFixture, unittest.TestCase):
 
     def tearDown(self):
         self.meta_schema.drop_all(self.engine)
+
+
+class TestCompilers(unittest.TestCase):
+
+    def setUp(self):
+        self.columns = [column('x'), column('y')]
+        self.test_table = table('test_table', *self.columns)
+
+    def test_stringify_query(self):
+        query = select('*').select_from(self.test_table).where(
+            self.test_table.c.x > 50
+        )
+
+        expected = 'SELECT * FROM test_table WHERE test_table.x > 50'
+        result = stringify_query(query).replace('\n', '')
+
+        self.assertEqual(expected, result)
