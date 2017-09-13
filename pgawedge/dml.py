@@ -2,10 +2,25 @@
 
 from typing import Iterable
 
-from sqlalchemy import Column, Table
+from sqlalchemy import Column, exists, literal_column, select, Table
 from sqlalchemy.dialects.postgresql import insert
 
 from pgawedge.postgres import PG_DIALECT
+from pgawedge.sql import primary_key_join
+
+
+def delete_not_exists(table, selectable):
+    """Statement to delete rows in table that are not in query result."""
+
+    delete_statement = table.delete().where(
+        ~exists(
+            select(
+                [literal_column('1')]
+            ).select_from(primary_key_join(table, selectable))
+        )
+    )
+
+    return delete_statement
 
 
 def create_insert_statement(table: Table, column_names=None) -> str:

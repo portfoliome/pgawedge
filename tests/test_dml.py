@@ -1,19 +1,41 @@
 import unittest
 
+from postpy.fixtures import PostgresStatementFixture
 import sqlalchemy as sa
 from sqlalchemy import (
-    BOOLEAN, Column, INTEGER, Table, MetaData, TIMESTAMP, VARCHAR
+    BOOLEAN, Column, INTEGER, MetaData, Table, TIMESTAMP, VARCHAR
 )
 
 from pgawedge.dml import (
-    create_insert_statement, get_required_columns,
+    create_insert_statement, delete_not_exists, get_required_columns,
     filter_server_default_columns, has_default, has_server_default,
     is_autoincrement_column
 )
+from pgawedge.postgres import PG_DIALECT
 
 
 def mock_default():
     return True
+
+
+class TestDeleteNotExists(PostgresStatementFixture, unittest.TestCase):
+    def setUp(self):
+        self.meta_schema = MetaData()
+        self.primary_key_name = 'id'
+        self.table = Table('foo', self.meta_schema,
+                           Column(self.primary_key_name, VARCHAR(60),
+                                  primary_key=True))
+        self.refresh_table = Table('foo_refresh', self.meta_schema,
+                                   Column(self.primary_key_name, VARCHAR(60)))
+
+    def test_build_delete_statement(self):
+        statement = delete_not_exists(self.table, self.refresh_table)
+
+        expected = ('DELETE FROM foo WHERE NOT (EXISTS (SELECT 1 '
+                    'FROM foo JOIN foo_refresh ON foo.id = foo_refresh.id))')
+        result = str(statement.compile(dialect=PG_DIALECT))
+
+        self.assertSQLStatementEqual(expected, result)
 
 
 class TestRequiredColumns(unittest.TestCase):
