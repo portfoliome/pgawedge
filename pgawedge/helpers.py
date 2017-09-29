@@ -4,6 +4,7 @@ from sqlalchemy import select, Table, Column
 from sqlalchemy.sql.functions import count
 from typing import Iterable
 
+from pgawedge.data_types import get_type_attributes
 from pgawedge.postgres import PG_DIALECT
 
 

@@ -1,4 +1,5 @@
 import uuid
+from inspect import signature
 
 from sqlalchemy.types import TypeEngine
 from sqlalchemy.dialects.postgresql import (
@@ -40,3 +41,25 @@ class UUID(TypeEngine):
             return value
 
         return process
+
+
+def get_type_attributes(data_type):
+    """Get SQL data type attributes.
+
+    Returns data type's attribute values for comparison. Intent is
+    to coverage basic Postgresql types. Types such as ARRAYs would
+    need to have additional calls if there are nested data type objects.
+    
+    Only supports positional_or_keyword arguments like Sqlalchemy.
+    """
+
+    sig = signature(data_type.__init__)
+
+    for attribute, parameter in sig.parameters.items():
+        if parameter.kind is parameter.POSITIONAL_OR_KEYWORD:
+            value = getattr(data_type, attribute)
+
+            if parameter.default is sig.empty:
+                yield value
+            elif parameter.default != value:
+                yield (attribute, value)

@@ -1,9 +1,8 @@
 import unittest
 
-import sqlalchemy as sa
 from sqlalchemy import (
     BOOLEAN, Column, INTEGER, MetaData, Table, TIMESTAMP, VARCHAR,
-    column, select, table
+    column, select, table, text
 )
 
 from pgawedge.fixtures import AlchemySQLFixture
@@ -20,12 +19,12 @@ def mock_default():
 class TestGetRowCount(AlchemySQLFixture, unittest.TestCase):
 
     def setUp(self):
-        self.meta_schema = sa.MetaData()
+        self.meta_schema = MetaData()
         self.column_name = 'my_rows'
         self.records = list(range(0, 5))
-        self.table = sa.Table(
+        self.table = Table(
             'row_count_test', self.meta_schema,
-            sa.Column(self.column_name, sa.INTEGER, autoincrement=False)
+            Column(self.column_name, INTEGER, autoincrement=False)
         )
         self.meta_schema.create_all(self.engine)
         self.engine.execute(self.table.insert().values(
@@ -76,7 +75,7 @@ class TestRequiredColumns(unittest.TestCase):
         self.autoincrement_column = Column('total', INTEGER, autoincrement=True)
         self.server_default_column = Column(
             'created_at', TIMESTAMP, nullable=False,
-            server_default=sa.text('NOW()')
+            server_default=text('NOW()')
         )
         self.default_column = Column('my_default', BOOLEAN, nullable=False,
                                      default=mock_default())
