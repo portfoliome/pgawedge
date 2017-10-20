@@ -33,3 +33,24 @@ def compile_insert(table: Table, column_names=None):
     """Sqlalchemy insert statement generator with Pyformat."""
 
     return insert(table).compile(dialect=PG_DIALECT, column_keys=column_names)
+
+
+def upsert_primary_key_statement(table: Table):
+    """Insert data when primary key doesn't exist, else update."""
+
+    ins = insert(table)
+    non_pkey_columns = set(
+        c.name for c in table.columns.values() if c.primary_key is False
+    )
+
+    if non_pkey_columns:
+        exclude = {
+            k: v for k, v in ins.excluded.items() if k in non_pkey_columns
+        }
+
+        ins = ins.on_conflict_do_update(
+            index_elements=table.primary_key.columns.keys(),
+            set_=exclude
+        )
+
+    return ins

@@ -3,7 +3,9 @@ import unittest
 from postpy.fixtures import PostgresStatementFixture
 from sqlalchemy import Column, MetaData, Table, VARCHAR
 
-from pgawedge.dml import create_insert_statement, delete_not_exists
+from pgawedge.dml import (
+    create_insert_statement, delete_not_exists, upsert_primary_key_statement
+)
 from pgawedge.postgres import PG_DIALECT
 
 
@@ -41,3 +43,16 @@ class TestInserts(unittest.TestCase):
         result = create_insert_statement(self.table)
 
         self.assertEqual(expected, result)
+
+    def test_upsert_primary_key(self):
+        statement = upsert_primary_key_statement(self.table)
+
+        expected = ('INSERT INTO foobar (foo, bar) VALUES (%(foo)s, %(bar)s)'
+                    ' ON CONFLICT (foo) DO UPDATE SET bar = excluded.bar')
+        result = str(statement.compile(dialect=PG_DIALECT))
+
+        self.assertEqual(expected, result)
+
+
+
+
