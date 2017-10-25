@@ -39,6 +39,7 @@ def upsert_primary_key_statement(table: Table):
     """Insert data when primary key doesn't exist, else update."""
 
     ins = insert(table)
+    constraint = table.primary_key.columns.keys()
     non_pkey_columns = set(
         c.name for c in table.columns.values() if c.primary_key is False
     )
@@ -48,9 +49,10 @@ def upsert_primary_key_statement(table: Table):
             k: v for k, v in ins.excluded.items() if k in non_pkey_columns
         }
 
-        ins = ins.on_conflict_do_update(
-            index_elements=table.primary_key.columns.keys(),
-            set_=exclude
+        statement = ins.on_conflict_do_update(
+            index_elements=constraint, set_=exclude
         )
+    else:
+        statement = ins.on_conflict_do_nothing(index_elements=constraint)
 
-    return ins
+    return statement

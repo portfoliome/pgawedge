@@ -53,6 +53,16 @@ class TestInserts(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_upsert_all_primary_key_columns(self):
+        columns = self.table.columns.values()
+        columns[1].primary_key = True
+        pk_table = Table('foobar', MetaData(), *[c.copy() for c in columns])
+        statement = upsert_primary_key_statement(pk_table)
 
+        expected = ('INSERT INTO foobar (foo, bar) VALUES (%(foo)s, %(bar)s)'
+                    ' ON CONFLICT (foo, bar) DO NOTHING')
+        result = str(statement.compile(dialect=PG_DIALECT))
+
+        self.assertEqual(expected, result)
 
 
