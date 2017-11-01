@@ -4,7 +4,8 @@ from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.schema import DDLElement
 
 
-__all__ = ('CreateUpdateAtTrigger', 'DropUpdateAtTrigger')
+__all__ = ('CreateUpdateAtTrigger', 'DropUpdateAtTrigger',
+           'UPDATE_AT_DDL_STATEMENT')
 
 
 UPDATE_AT_PROCEDURE = 'set_updated_at_timestamp()'
