@@ -10,9 +10,11 @@ def main():
     database = 'postgres'
     user = 'postgres'
 
-    url = sa.engine.url.URL('postgresql', host=os.environ['PGHOST'],
-                            database=database, username=user)
-    ddl_text = sa.text('CREATE DATABASE {};'.format(os.environ['PGDATABASE']))
+    url = sa.engine.url.URL(
+        'postgresql', host=os.environ['PGHOST'], database=database,
+        username=user, password=os.environ.get('PGPASSWORD', None)
+    )
+    ddl_text = sa.DDL('CREATE DATABASE {};'.format(os.environ['PGDATABASE']))
     engine = sa.create_engine(url)
     engine.raw_connection().set_isolation_level(
         ISOLATION_LEVEL_AUTOCOMMIT
