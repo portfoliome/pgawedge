@@ -8,7 +8,8 @@ from sqlalchemy import (
 from pgawedge.fixtures import AlchemySQLFixture
 from pgawedge.helpers import (
     get_required_columns, get_row_count, filter_server_default_columns,
-    stringify_query, has_server_default, has_default, is_autoincrement_column
+    stringify_query, has_server_default, has_default, is_autoincrement_column,
+    find_selectable_dependencies
 )
 
 
@@ -106,5 +107,18 @@ class TestRequiredColumns(unittest.TestCase):
     def test_get_required_columns(self):
         expected = set(['foo', 'bar', 'my_default'])
         result = set(c.name for c in get_required_columns(self.table))
+
+        self.assertEqual(expected, result)
+
+
+class TestSelectableDependencies(unittest.TestCase):
+    def test_find_selectable_dependencies(self):
+        meta = MetaData()
+        t1 = Table('foo', meta, Column('x'))
+        t2 = Table('bar', meta, Column('x'))
+        selectable = select([t1]).select_from(t1.join(t2, t1.c.x == t2.c.x))
+
+        expected = set([t1, t2])
+        result = set(find_selectable_dependencies(selectable))
 
         self.assertEqual(expected, result)
