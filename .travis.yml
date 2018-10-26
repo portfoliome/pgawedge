@@ -1,7 +1,7 @@
 language: python
 python:
-  - "3.5"
   - "3.6"
+  - "3.7"
 
 # current requirement to run postgres 9.5 on travis
 sudo: required
@@ -18,7 +18,7 @@ env:
 cache:
   directories:
     - $HOME/.cache/pip/wheels
-    - $HOME/travis/virtualenv/python3.5.2
+    - $HOME/travis/virtualenv/python3.7.0
 
 install:
   - pip install --upgrade pip
