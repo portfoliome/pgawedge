@@ -1,8 +1,11 @@
 
 import sqlalchemy as sa
 from sqlalchemy import select, Table, Column
+from sqlalchemy.sql import Selectable
 from sqlalchemy.sql.functions import count
-from typing import Iterable
+from typing import Iterable, List
+
+from sqlalchemy.sql.util import find_tables
 
 from pgawedge.data_types import get_type_attributes
 from pgawedge.postgres import PG_DIALECT
@@ -82,3 +85,9 @@ def get_required_columns(table: Table,
 
         if not_nullable and no_default and not_autoincrement:
             yield column
+
+
+def find_selectable_dependencies(selectable: Selectable) -> List[Table]:
+    """Find the tables used in a select query."""
+
+    return (table for table in set(find_tables(selectable)))
