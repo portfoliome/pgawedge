@@ -2,8 +2,9 @@ language: python
 python:
   - "3.6"
   - "3.7"
+  dist: xenial
+  sudo: true
 
-# current requirement to run postgres 9.5 on travis
 sudo: required
 dist: trusty
 
